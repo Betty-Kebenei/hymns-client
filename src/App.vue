@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <Hymns />
+    <nav>
+      <router-link to="/">Hymns</router-link>
+      <router-link to="/add-hymn">Add Hymn</router-link>
+    </nav>
+
+    <router-view />
   </div>
 </template>
 
