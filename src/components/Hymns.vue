@@ -5,12 +5,9 @@
         </form>
         
         <ul>
-            <li v-for="(data, index) in hymns" :key="index">{{ data.hymn }}</li>
+            <li v-for="(data, index) in hymns" :key="index">{{ data.name }}</li>
         </ul>
 
-        <ul>
-            <li v-for="(data, index) in databaseHymns" :key="index">{{ data.name }}</li>
-        </ul>
     </div>
 </template>
 
@@ -22,21 +19,14 @@ export default {
   name: 'Hymns',
   data(){
     return {
-      hymns: [
-        {"hymn": "At The Cross"},
-        {"hymn": "Count Your Blessings"},
-        {"hymn": "Be Thou My Vision"},
-        {"hymn": "Come, Thou Fount of Every Blessing"},
-        {"hymn": "When Peace, Like a River"},
-      ],
-      databaseHymns: [],
+      hymns: [],
       errors: []
     }
   },
     mounted () {
       axios
       .get('http://localhost:3002/hymns')
-      .then(response => { this.databaseHymns = response.data })
+      .then(response => { this.hymns = response.data })
       .catch(error => { this.errors.push(error) })
      }
   }
