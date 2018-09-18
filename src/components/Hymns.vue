@@ -4,9 +4,13 @@
             <input type="text" placeholder="Search by title..." v-model="title" >
         </form>
         
-        <ul>
-            <li v-for="(data, index) in hymns" :key="index">{{ data.name }}</li>
+        <ul >
+            <li v-for="(data, index) in hymns" :key="index"  v-on:click="viewHymn(data._id)">
+                {{ data.name}}
+            </li>
         </ul>
+
+        <app-viewHymn v-bind:hymn="hymn"></app-viewHymn>
 
     </div>
 </template>
@@ -14,21 +18,39 @@
 <script>
 
 import axios from "axios";
+import ViewHymn from "./ViewHymn.vue";
 
 export default {
   name: 'Hymns',
+  components: {
+      'app-viewHymn': ViewHymn
+  },
   data(){
     return {
       hymns: [],
-      errors: []
+      errors: [],
+      hymnName: '',
+      hymnStanzas: '',
+      hymn: {}
     }
   },
     mounted () {
-      axios
-      .get('http://localhost:3002/hymns')
-      .then(response => { this.hymns = response.data })
-      .catch(error => { this.errors.push(error) })
-     }
+        axios
+        .get('http://localhost:3002/hymns')
+        .then(response => { this.hymns = response.data })
+        .catch(error => { this.errors.push(error) })
+    },
+    methods: {
+      viewHymn (hymnId) {
+          axios
+            .get(`http://localhost:3002/hymns/${hymnId}`)
+            .then(response => { 
+                this.hymn = response.data;
+                this.$router.push({name: 'viewHymn'});
+                 })
+            .catch(error => { this.errors.push(error) })
+        }
+    }
   }
   
 </script>
