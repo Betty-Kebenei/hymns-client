@@ -2,11 +2,11 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Hymns from './components/Hymns.vue';
 import HymnForm from './components/HymnForm.vue';
-import ViewHymn from './components/ViewHymn.vue';
 
 Vue.use(Router);
 
-export default new Router({
+export default new Router({ 
+    mode: 'history',
     routes: [
         {
             path: '/',
@@ -17,11 +17,6 @@ export default new Router({
             path: '/add-hymn',
             name: 'hymnForm',
             component: HymnForm
-        },
-        {
-            path: '/view',
-            name: 'viewHymn',
-            component: ViewHymn
         },
     ]
 })

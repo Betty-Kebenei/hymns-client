@@ -1,8 +1,7 @@
 <template>
     <div>
-        <p>Title</p>
         <h1 v-if="hymn">{{ hymn.name }}</h1>
-        <p v-if="hymn"> {{ hymn.stanzas}}</p>
+        <pre v-if="hymn">{{ hymn.stanzas}}</pre>
     </div>
 
 </template>
@@ -14,5 +13,15 @@ export default {
   props: ['hymn']
   
 }
-  
+
 </script>
+
+<style scoped>
+h1 {
+    font-size: 3rem;
+}
+
+pre {
+    font-size: 1.5rem;
+}
+</style>
