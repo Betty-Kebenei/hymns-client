@@ -39,7 +39,7 @@ body, html {
 }
 
 #app {
-  width: 50%;
+  width: 80%;
 }
 
 nav {

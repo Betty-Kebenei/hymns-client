@@ -3,15 +3,18 @@
         <form @submit.prevent="searchHymn">
             <input type="text" placeholder="Search by title..." v-model="title" >
         </form>
-        
-        <ul >
-            <li v-for="(data, index) in hymns" :key="index"  v-on:click="viewHymn(data._id)">
-                {{ data.name}}
-            </li>
-        </ul>
 
-        <app-viewHymn v-bind:hymn="hymn"></app-viewHymn>
+        <section id="left-nav">
+            <ul >
+                <li v-for="(data, index) in hymns" :key="index"  v-on:click="viewAHymn(data._id)">
+                    {{ data.name}}
+                </li>
+            </ul>
+        </section>
 
+        <section id="content">
+            <app-viewHymn v-bind:hymn="hymn"></app-viewHymn>
+        </section>
     </div>
 </template>
 
@@ -29,24 +32,24 @@ export default {
     return {
       hymns: [],
       errors: [],
-      hymnName: '',
-      hymnStanzas: '',
-      hymn: {}
+      hymn: null,
     }
   },
     mounted () {
         axios
         .get('http://localhost:3002/hymns')
-        .then(response => { this.hymns = response.data })
+        .then(response => { 
+            this.hymns = response.data;
+            () => { viewAHymn(response.data[0]._id)}
+            })
         .catch(error => { this.errors.push(error) })
     },
     methods: {
-      viewHymn (hymnId) {
+      viewAHymn (hymnId) {
           axios
             .get(`http://localhost:3002/hymns/${hymnId}`)
             .then(response => { 
                 this.hymn = response.data;
-                this.$router.push({name: 'viewHymn'});
                  })
             .catch(error => { this.errors.push(error) })
         }
@@ -57,7 +60,7 @@ export default {
 
 <style scoped>
 input {
-    width: 100%;
+    width: 90%;
     padding: 15px;
     margin-bottom: 10px;
     font-size: 1.3em;
@@ -74,9 +77,22 @@ ul li {
   padding: 20px;
   font-size: 1.3em;
   background-color: #E0EDF4;
-  border-left: 5px solid #3EB3F6;
+
   margin-bottom: 2px;
   color: #3E5252;
+}
+
+#left-nav {
+    width: 20%;
+    float: left;
+    min-height: 100vw;
+    border-right: 1px solid #fff;
+}
+
+#content {
+    width: 70%;
+    float: right;
+    min-height: 100vw;
 }
 
 </style>
