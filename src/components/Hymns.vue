@@ -6,7 +6,7 @@
 
         <section id="left-nav">
             <ul >
-                <li v-for="(data, index) in hymns" :key="index"  v-on:click="viewAHymn(data._id)">
+                <li class="titleLink" v-for="data in hymns" :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
                     {{ data.name}}
                 </li>
             </ul>
@@ -40,7 +40,7 @@ export default {
         .get('http://localhost:3002/hymns')
         .then(response => { 
             this.hymns = response.data;
-            () => { viewAHymn(response.data[0]._id)}
+            (this.hymns.length > 0) && this.viewAHymn(response.data[0]._id);
             })
         .catch(error => { this.errors.push(error) })
     },
@@ -50,9 +50,23 @@ export default {
             .get(`http://localhost:3002/hymns/${hymnId}`)
             .then(response => { 
                 this.hymn = response.data;
-                 })
+                })
             .catch(error => { this.errors.push(error) })
         }
+    },
+
+    activeHymn (evt, hymnId) {
+        let i, x, titleLinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        titleLinks = document.getElementsByClassName("titleLink");
+        for (i = 0; i < x.length; i++) {
+            titleLinks[i].className = titleLinks[i].className.replace(" w3-red", ""); 
+        }
+        document.getElementById(hymnId).style.display = "block";
+        evt.currentTarget.className += " w3-red";
     }
   }
   
