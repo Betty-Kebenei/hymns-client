@@ -1,13 +1,14 @@
 <template>
     <div>
-        <form @submit.prevent="searchHymn">
+        <form>
             <input type="text" placeholder="Search by title..." v-model="findHymn" >
         </form>
 
         <section id="left-nav">
             <ul >
                 <li class="titleLink" v-for="data in (findHymn.length > 0 ? filteredHymns : hymns)" :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
-                    {{ data.name}} 
+                    {{ data.name}}  <font-awesome-icon icon="trash" class="trash-hymn" v-on:click="deleteHymn(data._id)" />
+                </li>
             </ul>
         </section>
 
@@ -36,13 +37,7 @@ export default {
     }
   },
     mounted () {
-        axios
-        .get('http://localhost:3002/hymns')
-        .then(response => { 
-            this.hymns = response.data;
-            (this.hymns.length > 0) && this.viewAHymn(response.data[0]._id);
-            })
-        .catch(error => { this.errors.push(error) })
+        this.viewAllHymns();
     },
 
     computed: {
@@ -53,13 +48,32 @@ export default {
     },
 
     methods: {
-      viewAHymn (hymnId) {
+        viewAllHymns () {
+            axios
+            .get('http://localhost:3002/hymns')
+            .then(response => { 
+                this.hymns = response.data;
+                (this.hymns.length > 0) && this.viewAHymn(response.data[0]._id);
+                })
+            .catch(error => { this.errors.push(error) })
+        },
+
+        viewAHymn (hymnId) {
           axios
             .get(`http://localhost:3002/hymns/${hymnId}`)
             .then(response => { 
                 this.hymn = response.data;
                 })
             .catch(error => { this.errors.push(error) })
+        },
+
+        deleteHymn (hymnId) {
+            axios
+            .delete(`http://localhost:3002/hymns/${hymnId}`)
+            .then(()=> {
+                this.viewAllHymns();
+             })
+            .catch(error => { this.errors.push(error) }) 
         }
     },
 
