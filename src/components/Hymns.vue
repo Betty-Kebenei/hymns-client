@@ -1,14 +1,13 @@
 <template>
     <div>
         <form @submit.prevent="searchHymn">
-            <input type="text" placeholder="Search by title..." v-model="title" >
+            <input type="text" placeholder="Search by title..." v-model="findHymn" >
         </form>
 
         <section id="left-nav">
             <ul >
-                <li class="titleLink" v-for="data in hymns" :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
-                    {{ data.name}}
-                </li>
+                <li class="titleLink" v-for="data in (findHymn.length > 0 ? filteredHymns : hymns)" :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
+                    {{ data.name}} 
             </ul>
         </section>
 
@@ -30,6 +29,7 @@ export default {
   },
   data(){
     return {
+      findHymn: '',
       hymns: [],
       errors: [],
       hymn: null,
@@ -44,6 +44,14 @@ export default {
             })
         .catch(error => { this.errors.push(error) })
     },
+
+    computed: {
+        filteredHymns() {
+            let filter = new RegExp(this.findHymn, 'i')
+            return this.hymns.filter(hymn => hymn.name.match(filter))
+        }
+    },
+
     methods: {
       viewAHymn (hymnId) {
           axios
@@ -107,6 +115,9 @@ ul li {
     width: 70%;
     float: right;
     min-height: 100vw;
+}
+.trash-hymn {
+    float: right;
 }
 
 </style>
