@@ -6,8 +6,13 @@
 
         <section id="left-nav">
             <ul >
-                <li class="titleLink" v-for="data in (findHymn.length > 0 ? filteredHymns : hymns)" :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
-                    {{ data.name}}  <font-awesome-icon icon="trash" class="trash-hymn" v-on:click="deleteHymn(data._id)" />
+                <li 
+                    class="titleLink" 
+                    v-for="data in (findHymn.length > 0 ? filteredHymns : hymns)" 
+                    :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
+                    {{ data.name}}  
+                    <font-awesome-icon icon="trash" class="icon" v-on:click="deleteHymn(data._id)" />
+                    <font-awesome-icon icon="edit" class="icon" />
                 </li>
             </ul>
         </section>
@@ -130,8 +135,9 @@ ul li {
     float: right;
     min-height: 100vw;
 }
-.trash-hymn {
+.icon {
     float: right;
+    margin: 5px;
 }
 
 </style>

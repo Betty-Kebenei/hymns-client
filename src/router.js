@@ -14,7 +14,7 @@ export default new Router({
             component: Hymns
         },
         {
-            path: '/add-hymn',
+            path: '/hymn-form',
             name: 'hymnForm',
             component: HymnForm
         },
