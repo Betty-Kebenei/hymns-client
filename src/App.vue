@@ -2,7 +2,7 @@
   <div id="app">
     <nav>
       <router-link to="/">Hymns</router-link>
-      <router-link to="/add-hymn">Add Hymn</router-link>
+      <router-link to="/hymn-form">Add Hymn</router-link>
     </nav>
 
     <router-view />
@@ -39,7 +39,7 @@ body, html {
 }
 
 #app {
-  width: 80%;
+  width: 90%;
 }
 
 nav {
