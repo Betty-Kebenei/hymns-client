@@ -6,14 +6,16 @@
 
         <section id="left-nav">
             <ul >
-                <li 
-                    class="titleLink" 
-                    v-for="data in (findHymn.length > 0 ? filteredHymns : hymns)" 
-                    :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
-                    {{ data.name}}  
-                    <font-awesome-icon icon="trash" class="icon" v-on:click="deleteHymn(data._id)" />
-                    <font-awesome-icon icon="edit" class="icon" />
-                </li>
+                <transition-group name="bounce">
+                    <li 
+                        class="titleLink" 
+                        v-for="data in (findHymn.length > 0 ? filteredHymns : hymns)" 
+                        :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
+                        {{ data.name}}  
+                        <font-awesome-icon icon="trash" class="icon" v-on:click="deleteHymn(data._id)" />
+                        <font-awesome-icon icon="edit" class="icon" />
+                    </li>
+                </transition-group>
             </ul>
         </section>
 
@@ -99,46 +101,6 @@ export default {
   
 </script>
 
-<style scoped>
-input {
-    width: 90%;
-    padding: 15px;
-    margin-bottom: 10px;
-    font-size: 1.3em;
-    border-radius: 3px;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-}
-
-ul li {
-  padding: 20px;
-  font-size: 1.3em;
-  background-color: #E0EDF4;
-
-  margin-bottom: 2px;
-  color: #3E5252;
-}
-
-#left-nav {
-    width: 20%;
-    float: left;
-    min-height: 100vw;
-    border-right: 1px solid #fff;
-}
-
-#content {
-    width: 70%;
-    float: right;
-    min-height: 100vw;
-}
-.icon {
-    float: right;
-    margin: 5px;
-}
-
+<style scoped src="../static/Hymns.css">
 </style>
 
