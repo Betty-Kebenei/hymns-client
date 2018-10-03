@@ -4,7 +4,7 @@
         <input type="text" placeholder="Title of the hymn..." v-model="name" >
         <textarea v-model="stanzas" placeholder="Add the stanzas of the hymn..."></textarea>
         <input type="submit" value="Add Hymn">
-        <input type="button" value="Cancel" @click="cancel">
+        <input type="button" value="Cancel" @click="back">
     </form>
  </div>
 </template>
@@ -28,15 +28,21 @@ export default {
         axios
         .post('http://localhost:3002/hymns/create', { 
             name: this.name, stanzas: this.stanzas })
-        .then(() => {
-            this.$router.push({name: 'hymns'})
+        .then((response) => {
+            if(response.data) {
+                this.$router.push({name: 'hymns'})
+            } else if (response.errors) {
+                console.log(response.errors)
+            } else {
+                console.log('hey')
+            } 
         })
         .catch(error => { this.errors.push(error) })
-    }
-  },
+    },
 
-  cancel() {
+    back() {
       this.$router.push({name: 'hymns'});
+    }
   }
 }
 </script>

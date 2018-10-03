@@ -1,10 +1,9 @@
 <template>
     <div>
-        <form>
-            <input type="text" placeholder="Search by title..." v-model="findHymn" >
-        </form>
-
         <section id="left-nav">
+            <form>
+                <input type="text" placeholder="Search by title..." v-model="findHymn" >
+            </form>
             <ul >
                 <transition-group name="bounce">
                     <li 
@@ -18,7 +17,6 @@
                 </transition-group>
             </ul>
         </section>
-
         <section id="content">
             <app-viewHymn v-bind:hymn="hymn"></app-viewHymn>
         </section>

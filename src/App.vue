@@ -3,8 +3,8 @@
     <header>
       <img src="./assets/logo.png" alt="logo" />
       <nav>
-        <router-link to="/">Hymns</router-link>
-        <router-link to="/hymn-form">Add Hymn</router-link>
+        <router-link to="/">HOME</router-link>
+        <router-link to="/hymn-form">ADD HYMN</router-link>
       </nav>
     </header>
     <router-view />
@@ -53,6 +53,8 @@ header img, nav {
 nav {
   padding: 30px 20px 20px 0;
   position: absolute;
+  height: 80px;
+  margin-left: 20%;
 }
 
 nav a {
@@ -63,6 +65,7 @@ nav a {
   color: rgb(0, 110, 255);
   font-weight: bold;
   margin-right: 15px;
+  font-size: 1.5rem;
 }
 
 body {

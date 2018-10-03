@@ -19,6 +19,7 @@ export default {
 <style scoped>
 h1 {
     font-size: 3rem;
+    margin-top: 0;
 }
 
 pre {
