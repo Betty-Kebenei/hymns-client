@@ -10,9 +10,7 @@
 </template>
 
 <script>
-
 import axios from "axios";
-
 
 export default {
   name: 'HymnForm',
@@ -47,5 +45,5 @@ export default {
 }
 </script>
 
-<style scoped src="../static/HymnForm.css">
+<style scoped src="../styles/HymnForm.css">
 </style>

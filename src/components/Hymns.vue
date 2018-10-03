@@ -24,7 +24,6 @@
 </template>
 
 <script>
-
 import axios from "axios";
 import ViewHymn from "./ViewHymn.vue";
 
@@ -41,6 +40,7 @@ export default {
       hymn: null,
     }
   },
+
     mounted () {
         this.viewAllHymns();
     },
@@ -81,24 +81,9 @@ export default {
             .catch(error => { this.errors.push(error) }) 
         }
     },
-
-    activeHymn (evt, hymnId) {
-        let i, x, titleLinks;
-        x = document.getElementsByClassName("city");
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        titleLinks = document.getElementsByClassName("titleLink");
-        for (i = 0; i < x.length; i++) {
-            titleLinks[i].className = titleLinks[i].className.replace(" w3-red", ""); 
-        }
-        document.getElementById(hymnId).style.display = "block";
-        evt.currentTarget.className += " w3-red";
-    }
-  }
-  
+}
 </script>
 
-<style scoped src="../static/Hymns.css">
+<style scoped src="../styles/Hymns.css">
 </style>
 

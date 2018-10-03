@@ -1,0 +1,48 @@
+#app {
+    width: 100%;
+    left: -10%;
+}
+  
+header {
+    background-color: #fff;
+    box-shadow: 1px 0 1px rgba(0,0,0,0.25);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    max-height: 80px;
+    margin-bottom: 5px;
+}
+
+header img {
+    height: 80px;
+    width: 150px;
+    padding: 0 20px;
+}
+
+header img, nav {
+    display: inline;
+}
+  
+nav {
+    padding: 30px 20px 20px 0;
+    position: absolute;
+    height: 80px;
+    margin-left: 20%;
+}
+  
+nav a {
+    padding: 10px;
+    text-decoration: none;
+    background: #fff;
+    border-radius: 3px;
+    color: rgb(0, 110, 255);
+    font-weight: bold;
+    margin-right: 15px;
+    font-size: 1.5rem;
+}
+  
+body {
+    padding-top: 20px;
+    margin-top: 3.5%;
+    background:  url("../assets/music.png") repeat-y 80% top fixed;
+}
