@@ -4,14 +4,13 @@
         <input type="text" placeholder="Title of the hymn..." v-model="name" >
         <textarea v-model="stanzas" placeholder="Add the stanzas of the hymn..."></textarea>
         <input type="submit" value="Add Hymn">
+        <input type="button" value="Cancel" @click="back">
     </form>
  </div>
 </template>
 
 <script>
-
 import axios from "axios";
-
 
 export default {
   name: 'HymnForm',
@@ -27,42 +26,24 @@ export default {
         axios
         .post('http://localhost:3002/hymns/create', { 
             name: this.name, stanzas: this.stanzas })
-        .then(() => {
-            this.$router.push({name: 'hymns'})
+        .then((response) => {
+            if(response.data) {
+                this.$router.push({name: 'hymns'})
+            } else if (response.errors) {
+                console.log(response.errors)
+            } else {
+                console.log('hey')
+            } 
         })
         .catch(error => { this.errors.push(error) })
+    },
+
+    back() {
+      this.$router.push({name: 'hymns'});
     }
   }
 }
 </script>
 
-<style scoped>
-
-input {
-    width: 100%;
-    padding: 15px;
-    margin-bottom: 10px;
-    font-size: 1.3em;
-    border-radius: 3px;
-}
-
-textarea {
-    width: 100%;
-    padding: 15px;
-    min-height: 500px;
-    padding-bottom: 0;
-    font-size: 1.3em;
-    border-radius: 3px;
-}
-
-input[type="submit"] {
-    width: 20%;
-    float: right;
-    margin-top: 20px;
-    background-color: #E0EDF4;
-    font-weight: bold;
-    color: #000;
-    border-radius: 3px;
-}
-
+<style scoped src="../styles/HymnForm.css">
 </style>

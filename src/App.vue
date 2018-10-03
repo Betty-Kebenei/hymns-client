@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Hymns</router-link>
-      <router-link to="/hymn-form">Add Hymn</router-link>
-    </nav>
-
+    <header>
+      <img src="./assets/logo.png" alt="logo" />
+      <nav>
+        <router-link to="/">HOME</router-link>
+        <router-link to="/hymn-form">ADD HYMN</router-link>
+      </nav>
+    </header>
     <router-view />
   </div>
 </template>
@@ -16,47 +18,11 @@ import HymnForm from './components/HymnForm.vue';
 export default {
   name: 'app',
   components: {
-    Hymns,
-    HymnForm
+    'hymns': Hymns,
+    'hymn-form': HymnForm
   }
 }
 </script>
 
-<style>
- 
-body {
-  background-color: #EEEEEE;
-  font-family: 'Montserrat', sans-serif;
-  display: grid;
-  grid-template-rows: auto;
-  justify-items: center;
-  padding-top: 50px;
-}
-
-body, html {
-  margin: 0;
-  height: 100%;
-}
-
-#app {
-  width: 90%;
-}
-
-nav {
-  padding: 20px 20px 20px 0;
-}
-
-nav {
-  padding: 20px 20px 20px 0;
-}
-
-nav a {
-  padding: 10px;
-  text-decoration: none;
-  background: #fff;
-  border-radius: 3px;
-  color: rgb(0, 110, 255);
-  font-weight: bold;
-  margin-right: 15px;
-}
+<style src="./styles/App.css">
 </style>
