@@ -62,3 +62,11 @@ ul li {
         transform: scale(1);
     }
 }
+
+button {
+    padding: 15px;
+    float: right;
+    border-radius: 10%;
+    margin-bottom: 5%;
+    background-color: #E0EDF4;
+}

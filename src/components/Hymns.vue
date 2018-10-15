@@ -1,8 +1,9 @@
 <template>
     <div>
         <section id="left-nav">
+            <button @click="openHymnForm">ADD HYMN</button>
             <form>
-                <input type="text" placeholder="Search by title..." v-model="findHymn" >
+                <input type="text" placeholder="Search hymn by title..." v-model="findHymn" >
             </form>
             <ul >
                 <transition-group name="bounce">
@@ -12,13 +13,18 @@
                         :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
                         {{ data.name}}  
                         <font-awesome-icon icon="trash" class="icon" v-on:click="deleteHymn(data._id)" />
-                        <font-awesome-icon icon="edit" class="icon" />
+                        <font-awesome-icon icon="edit" class="icon" @click="updateHymn(data._id)" />
                     </li>
                 </transition-group>
             </ul>
         </section>
         <section id="content">
-            <app-viewHymn v-bind:hymn="hymn"></app-viewHymn>
+            <div v-show="!hymnForm">
+                <view-hymn v-bind:hymn="hymn" />
+            </div>
+            <div v-show="hymnForm">
+                <hymn-form :hymn="hymn" />
+            </div>
         </section>
     </div>
 </template>
@@ -26,11 +32,13 @@
 <script>
 import axios from "axios";
 import ViewHymn from "./ViewHymn.vue";
+import HymnForm from "./HymnForm.vue";
 
 export default {
   name: 'Hymns',
   components: {
-      'app-viewHymn': ViewHymn
+      'view-hymn': ViewHymn,
+      'hymn-form': HymnForm
   },
   data(){
     return {
@@ -38,6 +46,7 @@ export default {
       hymns: [],
       errors: [],
       hymn: null,
+      hymnForm: false,
     }
   },
 
@@ -53,6 +62,11 @@ export default {
     },
 
     methods: {
+        openHymnForm() {
+            this.hymnForm = true;
+            this.hymn= {};
+        },
+
         viewAllHymns () {
             axios
             .get('http://localhost:3002/hymns')
@@ -79,6 +93,11 @@ export default {
                 this.viewAllHymns();
              })
             .catch(error => { this.errors.push(error) }) 
+        },
+
+        updateHymn (hymnId) {
+            this.viewAHymn(hymnId);
+            this.hymnForm = true;
         }
     },
 }
