@@ -3,7 +3,7 @@
     <form @submit.prevent="addHymn">
         <input type="text" placeholder="Title of the hymn..." v-model="name" >
         <textarea v-model="stanzas" placeholder="Add the stanzas of the hymn..."></textarea>
-        <input type="submit" value="Add Hymn">
+        <input type="submit" v-bind:value= "editting ? 'Edit Hymn' : 'Add Hymn'">
         <input type="button" value="Cancel" @click="back">
     </form>
  </div>
@@ -18,9 +18,23 @@ export default {
       return {
           name: '',
           stanzas: '',
-          errors: []
+          errors: [],
+          editting: false
       }
   },
+
+  props: {
+      hymn: Object
+  },
+
+  watch: {
+      hymn() {
+        this.name = this.hymn.name;
+        this.stanzas = this.hymn.stanzas;
+        this.editting = Object.keys(this.hymn).length > 0 ? true : false;
+      }
+  },
+
   methods: {
     addHymn() {
         axios
