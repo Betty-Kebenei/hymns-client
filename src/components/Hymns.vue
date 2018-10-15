@@ -12,7 +12,7 @@
                         :key="data._id"  v-on:click="viewAHymn(data._id)" :id="data._id">
                         {{ data.name}}  
                         <font-awesome-icon icon="trash" class="icon" v-on:click="deleteHymn(data._id)" />
-                        <font-awesome-icon icon="edit" class="icon" />
+                        <font-awesome-icon icon="edit" class="icon" @click="updateHymn(data._id)" />
                     </li>
                 </transition-group>
             </ul>
@@ -79,6 +79,11 @@ export default {
                 this.viewAllHymns();
              })
             .catch(error => { this.errors.push(error) }) 
+        },
+
+        updateHymn (hymnId) {
+            this.viewAHymn(hymnId);
+            this.$router.push({name: 'hymnForm'});
         }
     },
 }
